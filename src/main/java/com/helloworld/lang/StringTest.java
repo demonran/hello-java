@@ -1,4 +1,4 @@
-package com.tcl.helloworld.lang;
+package com.helloworld.lang;
 
 public class StringTest
 {

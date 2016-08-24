@@ -1,4 +1,4 @@
-package com.tcl.helloworld;
+package com.helloworld;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

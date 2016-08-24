@@ -1,4 +1,4 @@
-package com.tcl.helloworld.json;
+package com.helloworld.json;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;

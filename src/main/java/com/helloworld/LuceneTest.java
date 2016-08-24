@@ -1,21 +1,18 @@
-package com.tcl.helloworld;
+package com.helloworld;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
@@ -23,10 +20,9 @@ import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.util.IOUtils;
-import org.apache.lucene.util.Version;
+import org.apache.lucene.util.QueryBuilder;
 
-import com.tcl.helloworld.util.FileUitls;
+import com.helloworld.util.FileUitls;
 
 public class LuceneTest
 {
@@ -36,11 +32,11 @@ public class LuceneTest
 
 	public void createIndex() throws IOException
 	{
-		Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_36);
+		Analyzer analyzer = new StandardAnalyzer();
 		
-		IndexWriterConfig conf = new IndexWriterConfig(Version.LUCENE_36, analyzer);
+		IndexWriterConfig conf = new IndexWriterConfig(analyzer);
 		
-		Directory directory = FSDirectory.open(new File(INDEX_DIR));
+		Directory directory = FSDirectory.open(new File(INDEX_DIR).toPath());
 		
 		IndexWriter indexWriter = new IndexWriter(directory, conf);
 		
@@ -52,7 +48,7 @@ public class LuceneTest
 		for(File file : dataDir.listFiles())
 		{
 			Document doc = new Document();
-			doc.add(new Field("path",file.getAbsolutePath(),Field.Store.YES, Field.Index.NO));
+			doc.add(new StringField("path",file.getAbsolutePath(),Field.Store.YES));
 			doc.add(new Field("content",FileUitls.read(file), Field.Store.YES,    
                     Field.Index.ANALYZED,    
                     Field.TermVector.WITH_POSITIONS_OFFSETS));
@@ -65,14 +61,15 @@ public class LuceneTest
 	
 	public void searchByKeyword(String Keyword) throws Exception
 	{
-		FSDirectory directory = FSDirectory.open(new File(INDEX_DIR));
-		IndexReader reader = IndexReader.open(directory);
+		FSDirectory directory = FSDirectory.open(new File(INDEX_DIR).toPath());
+		IndexReader reader = DirectoryReader.open(directory);
 		IndexSearcher searcher = new IndexSearcher(reader);
 		
-		Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_36);
+		Analyzer analyzer = new StandardAnalyzer();
 
-		QueryParser parser = new QueryParser(Version.LUCENE_36, "content",analyzer);
-		Query query = parser.parse(Keyword);
+//		QueryParser parser = new QueryParser(Version.LATEST, ,analyzer);
+//		Query query = parser.parse(Keyword);
+		Query query = new QueryBuilder(analyzer).createPhraseQuery("content", Keyword);
 		TopDocs topdocs = searcher.search(query, 1000);
 		
 		ScoreDoc[] scoreDocs = topdocs.scoreDocs;
@@ -91,13 +88,12 @@ public class LuceneTest
 			System.out.println("内容："+doc.get("content"));
 		}
 		
-		searcher.close();
 	}
 	
 	public void searchByKeyword2(String Keyword) throws Exception
 	{
-		FSDirectory directory = FSDirectory.open(new File(INDEX_DIR));
-		IndexReader reader = IndexReader.open(directory);
+		FSDirectory directory = FSDirectory.open(new File(INDEX_DIR).toPath());
+		IndexReader reader = DirectoryReader.open(directory);
 		IndexSearcher searcher = new IndexSearcher(reader);
 		
 //		Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_36);
@@ -125,7 +121,6 @@ public class LuceneTest
 			System.out.println("内容："+doc.get("content"));
 		}
 		
-		searcher.close();
 	}
 	
 	

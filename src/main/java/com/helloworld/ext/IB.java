@@ -1,4 +1,4 @@
-package com.tcl.helloworld.ext;
+package com.helloworld.ext;
 
 public interface IB extends IA
 {

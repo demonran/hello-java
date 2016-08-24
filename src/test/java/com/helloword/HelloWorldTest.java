@@ -1,6 +1,5 @@
-package com.tcl.helloword;
+package com.helloword;
 
-import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
 public class HelloWorldTest

@@ -1,4 +1,4 @@
-package com.tcl.helloworld.util;
+package com.helloworld.util;
 
 import java.io.BufferedReader;
 import java.io.File;

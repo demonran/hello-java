@@ -1,4 +1,4 @@
-package com.tcl.helloworld.json;
+package com.helloworld.json;
 
 import java.io.IOException;
 import java.util.List;

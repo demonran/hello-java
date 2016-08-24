@@ -1,4 +1,4 @@
-package com.tcl.helloworld.model;
+package com.helloworld.model;
 
 public class PersonDetail
 {

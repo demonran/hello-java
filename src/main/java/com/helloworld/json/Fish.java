@@ -1,4 +1,4 @@
-package com.tcl.helloworld.json;
+package com.helloworld.json;
 
 public class Fish extends Animal
 {

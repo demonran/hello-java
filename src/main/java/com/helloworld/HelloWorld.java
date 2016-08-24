@@ -1,4 +1,4 @@
-package com.tcl.helloworld;
+package com.helloworld;
 
 import java.util.Random;
 

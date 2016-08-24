@@ -1,4 +1,4 @@
-package com.tcl.helloworld;
+package com.helloworld;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -13,10 +13,10 @@ import org.apache.solr.common.SolrInputDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.tcl.helloworld.model.PersonDetail;
+import com.helloworld.model.PersonDetail;
     
 /** 
- * @author Sam 时间：2011-9-16 下午3:25:15 
+ * @author Sam 鏃堕棿锛�2011-9-16 涓嬪崍3:25:15 
  */  
 public class PersonSolrServer {  
         
@@ -31,9 +31,9 @@ public class PersonSolrServer {
     private final static String ASC = "asc";  
         
     public PersonSolrServer() throws MalformedURLException {  
-        System.out.println("初始化solr服务..");  
-        server = new HttpSolrServer( URL );//使用HTTPClient 和solr服务器进行通信  
-        server.setRequestWriter(new BinaryRequestWriter());//使用流输出方式  
+        System.out.println("鍒濆鍖杝olr鏈嶅姟..");  
+        server = new HttpSolrServer( URL );//浣跨敤HTTPClient 鍜宻olr鏈嶅姟鍣ㄨ繘琛岄�氫俊  
+        server.setRequestWriter(new BinaryRequestWriter());//浣跨敤娴佽緭鍑烘柟寮�  
         server.setSoTimeout(SOCKE_TTIMEOUT);// socket read timeout  
         server.setConnectionTimeout(CONN_TIMEOUT);  
         server.setDefaultMaxConnectionsPerHost(MAXCONN_DEFAULT);  
@@ -44,7 +44,7 @@ public class PersonSolrServer {
     }  
         
     /** 
-     * 创建索引 
+     * 鍒涘缓绱㈠紩 
      */  
     public void createIndex(PersonDetail pd) throws Exception {  
         SolrInputDocument doc = new SolrInputDocument();  
@@ -54,22 +54,22 @@ public class PersonSolrServer {
         server.add(doc);  
         server.optimize();  
         server.commit();  
-        System.out.println("----索引创建完毕!!!");      
+        System.out.println("----绱㈠紩鍒涘缓瀹屾瘯!!!");      
     }  
     /** 
-     * 删除索引 
-     * @author Sam 时间：2011-9-16 下午3:32:55    
+     * 鍒犻櫎绱㈠紩 
+     * @author Sam 鏃堕棿锛�2011-9-16 涓嬪崍3:32:55    
      * @throws Exception 
      */  
     public void delIndex() throws Exception {  
         server.deleteByQuery("*:*");  
         server.commit();  
-        System.out.println("----索引清除完毕!!!");  
+        System.out.println("----绱㈠紩娓呴櫎瀹屾瘯!!!");  
     }  
         
     /** 
-     * 查询 
-     * @author Sam 时间：2011-9-16 下午3:33:14    
+     * 鏌ヨ 
+     * @author Sam 鏃堕棿锛�2011-9-16 涓嬪崍3:33:14    
      * @param key 
      * @param startPage 
      * @param pageSize 
@@ -77,21 +77,21 @@ public class PersonSolrServer {
      */  
     public List<Integer> queryList(String key, Integer start, Integer rows) throws Exception {  
         SolrQuery query = new SolrQuery(getkey(key));  
-        query.setHighlight(true); //开启高亮组件  
+        query.setHighlight(true); //寮�鍚珮浜粍浠�  
         query.addHighlightField("id");  
-        query.addHighlightField("chName");//高亮字段  
+        query.addHighlightField("chName");//楂樹寒瀛楁  
         query.addHighlightField("enName");  
-        query.setHighlightSimplePre("<font color='red'>");//前缀  
-        query.setHighlightSimplePost("</font>");//后缀  
+        query.setHighlightSimplePre("<font color='red'>");//鍓嶇紑  
+        query.setHighlightSimplePost("</font>");//鍚庣紑  
         query.set("hl.usePhraseHighlighter", true);  
         query.set("hl.highlightMultiTerm", true);  
-        query.set("hl.snippets", 3);//三个片段,默认是1  
-        query.set("hl.fragsize", 50);//每个片段50个字，默认是100  
-        query.setStart(start); //起始位置 …分页  
-        query.setRows(rows);//文档数  
+        query.set("hl.snippets", 3);//涓変釜鐗囨,榛樿鏄�1  
+        query.set("hl.fragsize", 50);//姣忎釜鐗囨50涓瓧锛岄粯璁ゆ槸100  
+        query.setStart(start); //璧峰浣嶇疆 鈥﹀垎椤�  
+        query.setRows(rows);//鏂囨。鏁�  
             
         QueryResponse rep = server.query(query);  
-        List<SolrDocument> docs = rep.getResults();//得到结果集  
+        List<SolrDocument> docs = rep.getResults();//寰楀埌缁撴灉闆�  
         List<Integer> idList = new ArrayList<Integer>();  
         for(SolrDocument doc : docs) {  
             idList.add(Integer.parseInt((String) doc.getFieldValue("id")));  

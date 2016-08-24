@@ -1,4 +1,4 @@
-package com.tcl.helloworld.awt;
+package com.helloworld.awt;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
