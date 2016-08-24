@@ -1,0 +1,13 @@
+<opencms>
+  <system>
+    <scheduler>
+      <job>
+          <name>StaticExportPromotionsAtMidnightJob</name>
+          <class>com.sf.portal.opencms.job.ScheduledStaticExportJob</class>
+          <reuseinstance>false</reuseinstance>
+          <active>true</active>
+          <cronexpression><![CDATA[0 0 0 * * ?]]></cronexpression>
+      </job>
+    </scheduler>
+   </system>
+  </opencms>
