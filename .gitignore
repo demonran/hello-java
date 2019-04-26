@@ -1,3 +1,11 @@
 /.classpath
 /target/
 /.settings/
+
+.gradle/
+.idea/
+build/
+out/
+*.iml
+*.ipr
+*.iws
