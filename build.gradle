@@ -4,7 +4,7 @@ plugins {
     id 'idea'
 }
 
-group = 'com.helloworld'
+group = 'com.hellojava'
 version = '0.0.1-SNAPSHOT'
 description = 'Maven'
 sourceCompatibility = '1.8'
