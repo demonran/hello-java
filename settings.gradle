@@ -1,1 +1,4 @@
 rootProject.name = 'hello-java'
+include 'java-se'
+include 'java-spring-ws'
+

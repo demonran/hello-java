@@ -1,51 +1,36 @@
-
 plugins {
-    id 'java'
     id 'idea'
 }
 
 group = 'com.hellojava'
 version = '0.0.1-SNAPSHOT'
 description = 'Maven'
-sourceCompatibility = '1.8'
 
+allprojects {
+    apply plugin: 'idea'
+}
 
-repositories {
-    mavenLocal()
-    maven {
-        url = 'http://repo.maven.apache.org/maven2'
+subprojects {
+
+    repositories {
+        mavenCentral()
+        maven { url  'http://repo.maven.apache.org/maven2' }
+    }
+
+    apply plugin: 'java'
+
+    ext {
+        lombokVersion = '1.18.6'
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.8'
+        annotationProcessor 'org.projectlombok:lombok:1.18.8'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     }
 }
 
-ext{
-    easyexcelVersion = '1.1.2-beta5'
-    lombokVersion = '1.18.6'
-}
-
-dependencies {
-    compile 'commons-digester:commons-digester:1.8'
-    compile 'org.quartz-scheduler:quartz:1.7.2'
-    compile 'org.eclipse:swt:3.2.1-v3235e'
-    compile 'org.eclipse:ui:3.3.0-I20070614-0800'
-    compile 'org.eclipse.core:runtime:2.2.1'
-    compile 'org.eclipse.ui:workbench:3.3.0-I20070608-1100'
-    compile 'log4j:log4j:1.2.17'
-    compile 'org.slf4j:slf4j-api:[1.7.5,)'
-    compile 'org.slf4j:slf4j-log4j12:[1.7.5,)'
-    compile 'org.slf4j:jcl-over-slf4j:[1.7.5,)'
-    compile 'org.apache.solr:solr-solrj:5.4.1'
-    compile 'org.apache.lucene:lucene-core:5.4.1'
-    compile 'org.apache.lucene:lucene-queryparser:5.4.1'
-    compile 'org.apache.lucene:lucene-analyzers-common:5.4.1'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.8.1'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.1'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.1'
-    compile 'com.google.zxing:javase:3.1.0'
-
-    implementation("com.alibaba:easyexcel:$easyexcelVersion")
-    implementation("org.projectlombok:lombok:$lombokVersion")
 
 
-    testCompile 'junit:junit:4.7'
-}
 

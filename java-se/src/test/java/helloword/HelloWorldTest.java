@@ -1,4 +1,4 @@
-package com.helloword;
+package helloword;
 
 import org.junit.Test;
 
