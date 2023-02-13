@@ -1,4 +1,6 @@
 rootProject.name = 'hello-java'
 include 'java-se'
-include 'java-spring-ws'
+include 'leetcode'
+include 'hello-reactor'
+include 'ddd-examples'
 

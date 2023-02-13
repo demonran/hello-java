@@ -1,33 +1,39 @@
 plugins {
-    id 'idea'
+    id "idea"
 }
 
-group = 'com.hellojava'
-version = '0.0.1-SNAPSHOT'
-description = 'Maven'
+group = "com.hellojava"
+version = "0.0.1-SNAPSHOT"
+description = "Maven"
 
 allprojects {
-    apply plugin: 'idea'
+    apply plugin: "idea"
 }
 
 subprojects {
 
     repositories {
+        mavenLocal()
+        maven { url "https://maven.aliyun.com/repository/public" }
         mavenCentral()
-        jcenter()
     }
 
-    apply plugin: 'java'
+    apply plugin: "java"
 
     ext {
-        lombokVersion = '1.18.6'
+        lombokVersion = "1.18.16"
     }
 
     dependencies {
-        compileOnly 'org.projectlombok:lombok:1.18.8'
-        annotationProcessor 'org.projectlombok:lombok:1.18.8'
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+        implementation "org.slf4j:slf4j-api:[1.7.5,)"
+        implementation "ch.qos.logback:logback-core:1.1.3"
+        implementation "ch.qos.logback:logback-classic:1.1.3"
+
+        testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.0"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+
     }
 }
 
