@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group 'com.hellojava'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+
+
+dependencies {
+    implementation platform('io.projectreactor:reactor-bom:Dysprosium-SR12')
+    implementation 'io.projectreactor:reactor-core'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+}
+
+test {
+    useJUnitPlatform()
+}
