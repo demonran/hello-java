@@ -23,7 +23,7 @@ public class UserService {
     public String hello() {
         User user  = new User();
         user.setUsername("test");
-        eventPublisher.publishEvent(new UserEvent(user));
+        eventPublisher.publishEvent(new UserEvent("user"));
 //        throw new RuntimeException();
         return "hello";
     }

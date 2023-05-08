@@ -1,10 +1,13 @@
 package com.hallojava.springboot;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.context.ApplicationEvent;
 
-public class UserEvent extends ApplicationEvent {
 
-    public UserEvent(Object source) {
-        super(source);
-    }
+@Data
+@AllArgsConstructor
+public class UserEvent  {
+
+   private String username;
 }
