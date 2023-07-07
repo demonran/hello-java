@@ -1,8 +1,7 @@
 package com.hallojava.springboot;
 
+import com.hallojava.springboot.user.UserAppService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @Autowired
-    private UserService userService;
+    private UserAppService userAppService;
 
     @RequestMapping("/")
     public String hello() {
-       return userService.hello();
+       return userAppService.hello();
     }
 
 }

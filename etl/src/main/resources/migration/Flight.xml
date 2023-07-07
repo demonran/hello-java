@@ -1,0 +1,22 @@
+<root>
+    <etl>io.github.lura.etl.flight.FlightEtl</etl>
+    <oldConfig>
+        <url>jdbc:mysql://localhost/my_db?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai</url>
+        <driver>com.mysql.cj.jdbc.Driver</driver>
+        <username>root</username>
+        <password>root</password>
+        <sql>
+            select * from user
+        </sql>
+    </oldConfig>
+    <newConfig>
+        <url>jdbc:mysql://localhost/my_db?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai</url>
+        <driver>com.mysql.cj.jdbc.Driver</driver>
+        <username>root</username>
+        <password>root</password>
+        <sql>
+            insert into user_bak(id, username) values(?,?);
+        </sql>
+    </newConfig>
+
+</root>

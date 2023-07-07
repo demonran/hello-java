@@ -1,4 +1,4 @@
-package com.hallojava.springboot;
+package com.hallojava.springboot.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
