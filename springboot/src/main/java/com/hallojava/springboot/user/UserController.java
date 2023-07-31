@@ -1,13 +1,10 @@
 package com.hallojava.springboot.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,7 +17,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@EnableBinding(Source.class)
 @RequestMapping("users")
 public class UserController {
 
@@ -29,7 +25,6 @@ public class UserController {
 
     private final ApplicationEventPublisher eventPublisher;
 
-    private final Source source;
 
     @GetMapping
     public List<User> list() {
@@ -41,6 +36,12 @@ public class UserController {
     public void create(@RequestBody User user) {
         userAppService.create(user);
     }
+
+    @PatchMapping("{id}/role")
+    public void updateRoles(@PathVariable Long id, @RequestBody List<Role> roles) {
+        userAppService.updateRoles(id, roles);
+    }
+
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {

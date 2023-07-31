@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import javax.persistence.EntityManager;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -39,11 +40,19 @@ public class UserAppService {
         userService.deleteById(id);
     }
 
-    @Transactional
     public void create(User user) {
-        user.setId(new Random().nextLong());
-        User savedUser = userRepository.saveAndFlush(user); // 保存实体并立即刷新持久化上下文
-        em.refresh(savedUser);
-        System.out.println(savedUser.getSid()); // 获取自增列的值
+        user.setUsername("admin");
+        Role role = new Role();
+        role.setName("管理员");
+        user.setRoles(Arrays.asList(role));
+        userRepository.save(user);
+
+    }
+
+    public void updateRoles(Long id, List<Role> roles) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("user not exist"));
+        user.getRoles().clear();
+        user.getRoles().addAll(roles);
+        userRepository.save(user);
     }
 }
