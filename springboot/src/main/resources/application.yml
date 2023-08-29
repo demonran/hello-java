@@ -1,28 +1,23 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost/my_db?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
-    username: root
-    password: root
-  #    url: jdbc:h2:~/testdb
-#    driver-class-name: org.h2.Driver
-#    username: sa
+    url: jdbc:h2:mem:h2-test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
   jpa:
     hibernate:
-      ddl-auto: update
-    defer-datasource-initialization: true
-    show-sql: true
-  cloud:
-    stream:
-      rocketmq:
-        binder:
-          name-server: 172.30.3.51:9876;172.30.3.52:9876;172.30.3.53:9876
-      bindings:
-        output:
-          destination: FMC
-        input:
-          destination: FMC
-          group: group03
+      ddl-auto: create
+#  cloud:
+#    stream:
+#      rocketmq:
+#        binder:
+#          name-server: 172.30.3.51:9876;172.30.3.52:9876;172.30.3.53:9876
+#      bindings:
+#        output:
+#          destination: FMC
+#        input:
+#          destination: FMC
+#          group: group03
 
-
+# 名字服务器地址
+rocketmq:
+  name-server: 172.30.3.51:9876;172.30.3.52:9876;172.30.3.53:9876
 
