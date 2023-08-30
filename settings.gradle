@@ -7,4 +7,7 @@ include 'ddd-examples'
 include 'springboot3'
 include 'springboot'
 include 'etl'
+include 'flowable-examples'
+include 'flowable-examples:flowable-se'
+findProject(':flowable-examples:flowable-se')?.name = 'flowable-se'
 
