@@ -17,8 +17,10 @@ configurations {
 
 
 dependencies {
+  implementation(project(":traffic-mgt"))
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
   implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.boot:spring-boot-starter-websocket'
   implementation 'com.h2database:h2'
   compileOnly 'org.projectlombok:lombok:1.18.22'
   annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
