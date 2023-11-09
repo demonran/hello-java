@@ -1,0 +1,33 @@
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+    <process id="all_key" name="多人会签006" isExecutable="true">
+        <startEvent id="startEvent1" flowable:formFieldValidation="true"></startEvent>
+        <userTask id="sid-56C2E056-E8B9-469A-AA0A-D3DD233E9685" name="员工投票" flowable:assignee="${person}">
+            <extensionElements>
+                <flowable:executionListener event="start" class="com.hellojava.flowable.ApplyTaskListener"></flowable:executionListener>
+                <flowable:executionListener event="end" class="com.hellojava.flowable.MyEndListener"/>
+                <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+            </extensionElements>
+            <multiInstanceLoopCharacteristics isSequential="false" flowable:collection="persons" flowable:elementVariable="person">
+                <loopCardinality>3</loopCardinality>
+                <completionCondition>${nrOfCompletedInstances/nrOfInstances >= 0.5 }</completionCondition>
+            </multiInstanceLoopCharacteristics>
+        </userTask>
+        <sequenceFlow id="sid-42768932-9A32-476A-92F5-544164EE44B3" sourceRef="startEvent1" targetRef="sid-56C2E056-E8B9-469A-AA0A-D3DD233E9685"></sequenceFlow>
+        <userTask id="sid-AA0E9C86-CDF4-422C-8C99-43ADAF838B57" name="经理审批" flowable:assignee="xkk" flowable:formFieldValidation="true">
+            <extensionElements>
+                <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+            </extensionElements>
+        </userTask>
+        <endEvent id="sid-6F85675E-A489-43FD-82EC-7B148D738939"></endEvent>
+        <sequenceFlow id="sid-D6A081B4-66A6-4CCB-92C8-DF27962D1B3A" sourceRef="sid-AA0E9C86-CDF4-422C-8C99-43ADAF838B57" targetRef="sid-6F85675E-A489-43FD-82EC-7B148D738939"></sequenceFlow>
+        <exclusiveGateway id="sid-83034BD9-1DEB-4AE8-A85E-2BA46A26818B"></exclusiveGateway>
+        <sequenceFlow id="sid-A66FF455-D909-4D99-9551-1855F2930951" sourceRef="sid-56C2E056-E8B9-469A-AA0A-D3DD233E9685" targetRef="sid-83034BD9-1DEB-4AE8-A85E-2BA46A26818B"></sequenceFlow>
+        <sequenceFlow id="sid-DA44BC94-243B-48F9-BA10-B7BADB3F5DB8" sourceRef="sid-83034BD9-1DEB-4AE8-A85E-2BA46A26818B" targetRef="sid-AA0E9C86-CDF4-422C-8C99-43ADAF838B57">
+            <conditionExpression xsi:type="tFormalExpression"><![CDATA[${status =="true"}]]></conditionExpression>
+        </sequenceFlow>
+        <userTask id="sid-88EB8D06-A17A-4869-8610-6C090D7BFB88" name="人事审批" flowable:formFieldValidation="true"></userTask>
+        <sequenceFlow id="sid-720EC886-26AF-4406-B282-A7AC30B0936B" sourceRef="sid-83034BD9-1DEB-4AE8-A85E-2BA46A26818B" targetRef="sid-88EB8D06-A17A-4869-8610-6C090D7BFB88">
+            <conditionExpression xsi:type="tFormalExpression"><![CDATA[${status=="false"}]]></conditionExpression>
+        </sequenceFlow>
+    </process>
+</definitions>
