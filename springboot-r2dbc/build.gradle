@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.6.11'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group 'com.hellojava'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility='1.8'
+
+dependencies {
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.data:spring-data-r2dbc'
+//    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'dev.miku:r2dbc-mysql'
+//    implementation 'mysql:mysql-connector-java:8.0.30'
+
+}
+
+test {
+    useJUnitPlatform()
+}

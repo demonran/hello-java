@@ -1,18 +1,14 @@
 plugins {
+    id 'java'
     id 'org.springframework.boot' version '2.6.11'
     id 'io.spring.dependency-management' version '1.1.0'
-    id 'java'
 }
 
 group = 'com.hallojava'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
+
 
 
 dependencies {
@@ -26,16 +22,9 @@ dependencies {
 
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
 
-//    implementation 'com.h2database:h2'
-    implementation 'mysql:mysql-connector-java'
+    implementation 'com.h2database:h2'
+//    implementation 'mysql:mysql-connector-java'
 
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-test {
-    useJUnitPlatform()
 }
