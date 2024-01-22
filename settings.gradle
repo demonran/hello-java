@@ -1,3 +1,11 @@
+pluginManagement {
+  repositories {
+    maven { url "https://maven.aliyun.com/repository/public" }
+    mavenCentral()
+    gradlePluginPortal()
+  }
+}
+
 rootProject.name = 'hello-java'
 include 'java-se'
 include 'hello-reactor'
@@ -13,4 +21,5 @@ include 'design-pattern'
 include 'flowable-examples:flowable-spring'
 include 'springboot-r2dbc'
 include 'spring-webflux'
+
 
