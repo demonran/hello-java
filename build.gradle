@@ -6,9 +6,6 @@ group = "com.hellojava"
 version = "0.0.1-SNAPSHOT"
 description = "Maven"
 
-allprojects {
-    apply plugin: "idea"
-}
 
 subprojects {
 

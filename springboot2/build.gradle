@@ -1,7 +1,5 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.6.11'
-    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group = 'com.hallojava'
@@ -12,6 +10,7 @@ sourceCompatibility = '1.8'
 
 
 dependencies {
+    implementation platform("org.springframework.boot:spring-boot-starter-parent:2.6.11")
 //    implementation 'org.springframework.boot:spring-boot-starter-integration'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
@@ -20,11 +19,15 @@ dependencies {
     implementation 'com.alibaba.cloud:spring-cloud-starter-stream-rocketmq:2021.1'
     implementation 'org.hibernate:hibernate-envers'
 
+    implementation 'org.dromara.dynamictp:dynamic-tp-spring-boot-starter-common:1.1.6.1'
+    implementation 'org.dromara.dynamictp:dynamic-tp-spring-boot-starter-extension-notify-email:1.1.6.1'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
 
     implementation 'com.h2database:h2'
 //    implementation 'mysql:mysql-connector-java'
 
 //    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
 }
